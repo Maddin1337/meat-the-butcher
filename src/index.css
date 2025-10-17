@@ -65,6 +65,111 @@
   .text-shadow-glow {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.8);
   }
+
+  /* Feuer-Texteffekt Klassen */
+  .fire-text {
+    background: linear-gradient(45deg, #FF6B35, #FFA500, #FFD700, #FF6B35);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fireAnimation 3s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.5), 0 0 40px rgba(255, 165, 0, 0.3);
+    position: relative;
+  }
+
+  .fire-text::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #FF4500, #FF6B35, #FFA500);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fireAnimation 2.5s ease-in-out infinite reverse;
+    opacity: 0.7;
+    z-index: -1;
+  }
+
+  .fire-text-glow {
+    text-shadow:
+      0 0 10px #FF6B35,
+      0 0 20px #FFA500,
+      0 0 30px #FFD700,
+      0 0 40px #FF6B35,
+      2px 2px 8px rgba(0, 0, 0, 0.8);
+    animation: fireFlicker 1.5s ease-in-out infinite alternate;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .fire-text-glow:hover {
+    animation-duration: 0.8s;
+    text-shadow:
+      0 0 15px #FF4500,
+      0 0 25px #FF6B35,
+      0 0 35px #FFA500,
+      0 0 45px #FFD700,
+      0 0 55px #FF6B35,
+      2px 2px 10px rgba(0, 0, 0, 0.9);
+    transform: scale(1.05);
+  }
+
+  .fire-text-intense {
+    background: linear-gradient(45deg, #C41E3A, #FF4500, #FF6B35, #FFA500, #FFD700);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: intenseFireAnimation 2s ease-in-out infinite;
+    text-shadow:
+      0 0 15px #FF4500,
+      0 0 25px #FF6B35,
+      0 0 35px #FFA500,
+      0 0 45px #FFD700,
+      3px 3px 10px rgba(0, 0, 0, 0.9);
+    position: relative;
+  }
+
+  .fire-text-intense::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fireShine 3s ease-in-out infinite;
+    opacity: 0.6;
+    z-index: 1;
+  }
+
+  .smoke-text {
+    animation: smokeAnimation 4s ease-in-out infinite;
+    opacity: 0.9;
+    position: relative;
+  }
+
+  .smoke-text::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: radial-gradient(ellipse at center, rgba(196, 30, 58, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: smokePulse 3s ease-in-out infinite;
+    z-index: -1;
+  }
 }
 
 @keyframes fadeIn {
@@ -134,6 +239,155 @@
   
   .scroll-indicator-bar {
     box-shadow: 0 0 15px rgba(196, 30, 58, 0.8);
+  }
+}
+
+/* Feuer-Animationen */
+@keyframes fireAnimation {
+  0% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    background-position: 50% 25%;
+    filter: hue-rotate(10deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: hue-rotate(-5deg);
+  }
+  75% {
+    background-position: 50% 75%;
+    filter: hue-rotate(5deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes intenseFireAnimation {
+  0% {
+    background-position: 0% 50%;
+    transform: scale(1);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  20% {
+    background-position: 30% 30%;
+    transform: scale(1.02);
+    filter: brightness(1.1) hue-rotate(5deg);
+  }
+  40% {
+    background-position: 60% 20%;
+    transform: scale(1.01);
+    filter: brightness(1.2) hue-rotate(-3deg);
+  }
+  60% {
+    background-position: 80% 60%;
+    transform: scale(1.03);
+    filter: brightness(1.15) hue-rotate(8deg);
+  }
+  80% {
+    background-position: 40% 80%;
+    transform: scale(1.01);
+    filter: brightness(1.05) hue-rotate(-5deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    transform: scale(1);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+}
+
+@keyframes fireFlicker {
+  0% {
+    text-shadow:
+      0 0 10px #FF6B35,
+      0 0 20px #FFA500,
+      0 0 30px #FFD700,
+      0 0 40px #FF6B35,
+      2px 2px 8px rgba(0, 0, 0, 0.8);
+    transform: translateY(0px);
+  }
+  25% {
+    text-shadow:
+      0 0 15px #FF4500,
+      0 0 25px #FF6B35,
+      0 0 35px #FFA500,
+      0 0 45px #FFD700,
+      2px 2px 10px rgba(0, 0, 0, 0.9);
+    transform: translateY(-1px);
+  }
+  50% {
+    text-shadow:
+      0 0 12px #FF6B35,
+      0 0 22px #FFA500,
+      0 0 32px #FFD700,
+      0 0 42px #FF6B35,
+      2px 2px 9px rgba(0, 0, 0, 0.85);
+    transform: translateY(1px);
+  }
+  75% {
+    text-shadow:
+      0 0 18px #FF4500,
+      0 0 28px #FF6B35,
+      0 0 38px #FFA500,
+      0 0 48px #FFD700,
+      2px 2px 11px rgba(0, 0, 0, 0.95);
+    transform: translateY(-2px);
+  }
+  100% {
+    text-shadow:
+      0 0 10px #FF6B35,
+      0 0 20px #FFA500,
+      0 0 30px #FFD700,
+      0 0 40px #FF6B35,
+      2px 2px 8px rgba(0, 0, 0, 0.8);
+    transform: translateY(0px);
+  }
+}
+
+@keyframes smokeAnimation {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0px) translateX(0px);
+    filter: blur(0px);
+  }
+  25% {
+    opacity: 0.8;
+    transform: translateY(-2px) translateX(1px);
+    filter: blur(0.5px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-4px) translateX(-1px);
+    filter: blur(1px);
+  }
+  75% {
+    opacity: 0.8;
+    transform: translateY(-2px) translateX(2px);
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translateY(0px) translateX(0px);
+    filter: blur(0px);
+  }
+}
+
+/* Responsive Anpassungen für Feuer-Animationen */
+@media (max-width: 768px) {
+  .fire-text,
+  .fire-text-intense {
+    animation-duration: 4s; /* Langsamere Animation auf mobilen Geräten */
+  }
+  
+  .fire-text-glow {
+    animation-duration: 2s;
+  }
+  
+  .smoke-text {
+    animation-duration: 5s;
   }
 }
 
