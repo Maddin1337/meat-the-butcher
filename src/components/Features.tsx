@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import PhotoGallery from './PhotoGallery';
 
 interface FeatureSectionProps {
   title: string;
@@ -139,8 +138,6 @@ export default function Features() {
           </div>
         </div>
       </section>
-      
-      <PhotoGallery />
     </>
   );
 }

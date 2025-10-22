@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -21,6 +21,8 @@ export default function ImageModal({
   hasNext = false,
   hasPrevious = false
 }: ImageModalProps) {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -35,6 +37,8 @@ export default function ImageModal({
     if (isOpen) {
       document.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
+      // Reset image loading state when modal opens
+      setIsImageLoaded(false);
     }
 
     return () => {
@@ -90,10 +94,20 @@ export default function ImageModal({
           </button>
         )}
 
+        {/* Loading indicator */}
+        {!isImageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-12 h-12 border-4 border-butcher-red border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
+        
         <img
           src={imageSrc}
           alt={imageAlt}
-          className="max-w-full max-h-full object-contain rounded-lg"
+          className={`max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ${
+            isImageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          onLoad={() => setIsImageLoaded(true)}
         />
       </div>
     </div>
