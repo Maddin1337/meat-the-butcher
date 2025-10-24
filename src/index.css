@@ -391,3 +391,92 @@
   }
 }
 
+/* Zusätzliche responsiven Anpassungen für die Hero Section */
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .hero-responsive {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
+  
+  .hero-logo-responsive {
+    height: 18rem;
+  }
+  
+  .hero-title-responsive {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-subtitle-responsive {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-button-responsive {
+    font-size: 1.75rem;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .hero-logo-responsive {
+    height: 20rem;
+  }
+}
+
+/* Sicherstellen, dass der Button immer sichtbar ist */
+.hero-button-container {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-height: 768px) {
+  .hero-compact {
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+  }
+  
+  .hero-logo-compact {
+    height: 12rem;
+  }
+  
+  .hero-title-compact {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-subtitle-compact {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-button-compact {
+    font-size: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Zusätzliche Anpassungen für sehr kleine mobile Geräte */
+@media (max-width: 640px) {
+  .hero-logo-mobile {
+    height: 18rem !important;
+  }
+  
+  .hero-title-mobile {
+    font-size: 1.75rem !important;
+  }
+  
+  .hero-subtitle-mobile {
+    font-size: 1rem !important;
+  }
+  
+  .hero-button-mobile {
+    font-size: 1.25rem !important;
+    padding: 0.75rem 1.5rem !important;
+  }
+}
+

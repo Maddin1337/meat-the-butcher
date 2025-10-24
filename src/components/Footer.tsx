@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Footer() {
   return (
     <footer className="bg-butcher-black-dark border-t-2 border-butcher-red py-12 px-4">
@@ -24,12 +26,18 @@ export default function Footer() {
               RECHTLICHES
             </h4>
             <div className="space-y-2 text-gray-400 text-sm">
-              <a href="#" className="block hover:text-butcher-red transition-colors">
+              <Link
+                to="/impressum"
+                className="block hover:text-butcher-red transition-colors"
+              >
                 Impressum
-              </a>
-              <a href="#" className="block hover:text-butcher-red transition-colors">
+              </Link>
+              <Link
+                to="/datenschutz"
+                className="block hover:text-butcher-red transition-colors"
+              >
                 Datenschutz
-              </a>
+              </Link>
             </div>
           </div>
         </div>

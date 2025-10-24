@@ -19,6 +19,9 @@ export default {
         'bebas': ['Bebas Neue', 'sans-serif'],
         'roboto-slab': ['Roboto Slab', 'serif'],
       },
+      screens: {
+        '3xl': '1600px',
+      },
     },
   },
   plugins: [],
