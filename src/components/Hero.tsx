@@ -45,14 +45,14 @@ export default function Hero() {
             JETZT ANFRAGEN
           </button>
           
-          {/* Pulsierender Pfeil - auf mobilen Geräten direkt unter dem Button */}
+          {/* Pulsierender Pfeil - auf allen Geräten direkt unter dem Button */}
           <div
             onClick={() => scrollToSection('features')}
-            className="md:hidden cursor-pointer float-animation mb-6"
+            className="cursor-pointer float-animation mb-6"
           >
             <IconChevronDown
               size={40}
-              className="w-8 h-8 text-butcher-red"
+              className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-butcher-red"
               strokeWidth={3}
             />
           </div>
