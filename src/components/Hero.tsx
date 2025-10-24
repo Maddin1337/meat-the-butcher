@@ -9,7 +9,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative h-screen flex items-start justify-center overflow-hidden pt-16 md:pt-20 lg:pt-24 pb-0 mb-0">
+    <section id="hero" className="relative min-h-screen flex items-start justify-center overflow-hidden pt-16 md:pt-20 lg:pt-24 pb-8 mb-0 hero-responsive">
       {/* Feuer-Canvas-Hintergrund */}
       <FireAnimation />
       
@@ -20,40 +20,43 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto fade-in">
-        <div className="flex justify-center mb-4 md:mb-6 lg:mb-8">
+      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto fade-in flex flex-col items-center justify-center min-h-[calc(100vh-8rem)]">
+        <div className="flex justify-center mb-2 md:mb-0 lg:mb-0 xl:mb-0">
           <img
             src="/logo-meatthebutcher.png"
             alt="Meat The Butcher"
-            className="h-80 md:h-72 lg:h-80 xl:h-96 2xl:h-[24rem] object-contain drop-shadow-2xl"
+            className="h-56 sm:h-60 md:h-64 lg:h-72 xl:h-80 2xl:h-96 object-contain drop-shadow-2xl hero-logo-responsive hero-logo-mobile"
           />
         </div>
 
-        <p className="text-3xl md:text-4xl lg:text-5xl font-roboto-slab font-semibold text-butcher-red-light mb-4 md:mb-6 lg:mb-8 text-shadow-strong">
-          BBQ <span className="text-white mr-2 font-bebas text-4xl md:text-5xl lg:text-6xl font-bold">Catering</span>vom Profi
+        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-roboto-slab font-semibold text-butcher-red-light mb-3 md:mb-4 lg:mb-6 xl:mb-8 text-shadow-strong hero-title-responsive hero-title-mobile">
+          BBQ <span className="text-white mr-2 font-bebas text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">Catering</span>vom Profi
         </p>
 
-        <p className="text-lg md:text-xl lg:text-xl xl:text-2xl text-gray-300 mb-6 md:mb-8 lg:mb-10 max-w-3xl lg:max-w-4xl mx-auto font-bold px-2">
+        <p className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl text-gray-300 mb-4 md:mb-6 lg:mb-8 xl:mb-10 max-w-3xl lg:max-w-4xl mx-auto font-bold px-2 hero-subtitle-responsive hero-subtitle-mobile">
           Ultimative Grill und BBQ Erlebnisse im "<span className="text-white">Open Kitchen Style</span>"
         </p>
 
-        <button
-          onClick={() => scrollToSection('contact')}
-          className="bg-butcher-red hover:bg-butcher-red-light text-white font-bebas text-2xl md:text-3xl lg:text-3xl xl:text-4xl px-12 py-4 md:py-5 lg:py-5 xl:py-6 rounded-none transition-all duration-300 transform hover:scale-105 glow-red mb-6 md:mb-8 lg:mb-10"
-        >
-          JETZT ANFRAGEN
-        </button>
-      </div>
-
-      <div
-        onClick={() => scrollToSection('features')}
-        className="absolute bottom-2 md:bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer float-animation"
-      >
-        <IconChevronDown
-          size={40}
-          className="w-8 h-8 md:w-10 md:h-10 text-butcher-red"
-          strokeWidth={3}
-        />
+        <div className="hero-button-container flex flex-col items-center mt-8 md:mt-0">
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="bg-butcher-red hover:bg-butcher-red-light text-white font-bebas text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 lg:py-5 xl:py-6 rounded-none transition-all duration-300 transform hover:scale-105 glow-red mb-4 md:mb-6 lg:mb-8 xl:mb-10 hero-button-responsive hero-button-mobile"
+          >
+            JETZT ANFRAGEN
+          </button>
+          
+          {/* Pulsierender Pfeil - auf mobilen Geräten direkt unter dem Button */}
+          <div
+            onClick={() => scrollToSection('features')}
+            className="md:hidden cursor-pointer float-animation mb-6"
+          >
+            <IconChevronDown
+              size={40}
+              className="w-8 h-8 text-butcher-red"
+              strokeWidth={3}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );
