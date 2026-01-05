@@ -1,2 +1,4 @@
 # Single Page Application Routing für React
-/*    /index.html   200
+# Spezifische Routen explizit definieren
+/impressum    /index.html   200
+/datenschutz    /index.html   200
