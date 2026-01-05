@@ -7,6 +7,21 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  build: {
+    cssCodeSplit: true, // CSS-Code-Splitting aktivieren
+    rollupOptions: {
+      output: {
+        // Optimiertes Chunk-Splitting
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+    // Sourcemaps für Production deaktivieren (kleinere Bundle-Größe)
+    sourcemap: false,
+    // Minify für kleinere Bundle-Größe
+    minify: 'esbuild',
+  },
   server: {
     host: '0.0.0.0', // Erlaubt Zugriff von allen Netzwerk-Interfaces
     port: 5173, // Standard Vite Port (kann geändert werden)

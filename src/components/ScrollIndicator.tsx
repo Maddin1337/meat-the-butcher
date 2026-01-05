@@ -4,10 +4,11 @@ const ScrollIndicator = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    // Throttling-Funktion für Performance-Optimierung
-    let throttleTimeout: NodeJS.Timeout | null = null;
+    // Verwende requestAnimationFrame für bessere Performance und um Forced Reflows zu vermeiden
+    let rafId: number | null = null;
     
     const calculateScrollProgress = () => {
+      // Alle Layout-Reads zusammen in requestAnimationFrame ausführen
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
@@ -15,24 +16,30 @@ const ScrollIndicator = () => {
     };
 
     const handleScroll = () => {
-      if (throttleTimeout === null) {
-        throttleTimeout = setTimeout(() => {
+      // Verwende requestAnimationFrame statt setTimeout für bessere Performance
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
           calculateScrollProgress();
-          throttleTimeout = null;
-        }, 16); // ~60fps
+          rafId = null;
+        });
       }
     };
 
-    // Initialen Fortschritt berechnen
-    calculateScrollProgress();
+    // Initialen Fortschritt in requestAnimationFrame berechnen
+    rafId = requestAnimationFrame(() => {
+      calculateScrollProgress();
+      rafId = null;
+    });
     
     // Event Listener hinzufügen
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (throttleTimeout) clearTimeout(throttleTimeout);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, []);
 

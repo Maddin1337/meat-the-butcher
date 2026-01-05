@@ -24,9 +24,12 @@ export default function Hero() {
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto fade-in flex flex-col items-center justify-center min-h-[calc(100vh-8rem)]">
         <div className="flex justify-center mb-2 md:mb-0 lg:mb-0 xl:mb-0">
           <img
-            src="/logo-meatthebutcher.png"
+            src="/logo-meatthebutcher.webp"
             alt="Meat The Butcher - BBQ Catering Euskirchen"
             className="h-56 sm:h-60 md:h-64 lg:h-72 xl:h-80 2xl:h-96 object-contain drop-shadow-2xl hero-logo-responsive hero-logo-mobile"
+            width={500}
+            height={500}
+            fetchPriority="high"
           />
         </div>
 

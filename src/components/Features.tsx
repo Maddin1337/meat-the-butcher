@@ -7,9 +7,17 @@ interface FeatureSectionProps {
   imagePosition: 'left' | 'right';
   delay?: number;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
-const FeatureSection = memo(function FeatureSection({ title, description, imagePosition, delay = 0, image }: FeatureSectionProps) {
+// Helper-Funktion zur Generierung von srcset für responsive Bilder
+function generateSrcSet(baseName: string): string {
+  const sizes = [400, 600, 800, 1000, 1200, 1600];
+  return sizes.map(size => `/responsive/${baseName}-${size}w.webp ${size}w`).join(', ');
+}
+
+const FeatureSection = memo(function FeatureSection({ title, description, imagePosition, delay = 0, image, imageWidth, imageHeight }: FeatureSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -31,6 +39,16 @@ const FeatureSection = memo(function FeatureSection({ title, description, imageP
     return () => observer.disconnect();
   }, [delay]);
 
+  // Berechne Aspect Ratio für width/height Attribute
+  const aspectRatio = imageWidth && imageHeight ? imageWidth / imageHeight : 16 / 9;
+  const displayHeight = 384; // h-96 = 384px
+  const displayWidth = Math.round(displayHeight * aspectRatio);
+
+  // Extrahiere Basisnamen für srcset (z.B. "burger" aus "/burger.webp")
+  const baseName = image ? image.replace(/^\//, '').replace(/\.webp$/, '') : '';
+  const srcSet = baseName ? generateSrcSet(baseName) : undefined;
+  const sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
+
   return (
     <div
       ref={ref}
@@ -42,8 +60,12 @@ const FeatureSection = memo(function FeatureSection({ title, description, imageP
         {image ? (
           <img
             src={image}
+            srcSet={srcSet}
+            sizes={sizes}
             alt={`${title} - BBQ Catering Euskirchen`}
             className="w-full h-96 object-cover"
+            width={displayWidth}
+            height={displayHeight}
             loading="lazy"
           />
         ) : (
@@ -125,6 +147,8 @@ export default function Features() {
               imagePosition="left"
               delay={ANIMATION_DELAYS.FEATURE_SECTION_1}
               image="/lasse-mo.webp"
+              imageWidth={1750}
+              imageHeight={1162}
             />
 
             <FeatureSection
@@ -133,6 +157,8 @@ export default function Features() {
               imagePosition="right"
               delay={ANIMATION_DELAYS.FEATURE_SECTION_2}
               image="/burger.webp"
+              imageWidth={1642}
+              imageHeight={2154}
             />
 
             <FeatureSection
@@ -141,6 +167,8 @@ export default function Features() {
               imagePosition="left"
               delay={ANIMATION_DELAYS.FEATURE_SECTION_3}
               image="/grill-beach.webp"
+              imageWidth={1440}
+              imageHeight={1920}
             />
           </div>
         </div>

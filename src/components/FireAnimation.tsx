@@ -35,19 +35,37 @@ export default function FireAnimation() {
     if (!ctx) return;
 
     // Performance und Responsive Einstellungen
-    const isMobile = window.innerWidth < 768;
+    // Initiale Größen in requestAnimationFrame lesen, um Forced Reflows zu vermeiden
+    let isMobile = false;
     const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     // Set canvas dimensions mit Performance-Optimierung
     const resizeCanvas = () => {
-      const scale = isMobile ? 0.8 : 1; // Reduzierte Auflösung auf mobilen Geräten
+      // Verwende requestAnimationFrame, um Layout-Reads zu bündeln
+      requestAnimationFrame(() => {
+        isMobile = window.innerWidth < 768;
+        const scale = isMobile ? 0.8 : 1; // Reduzierte Auflösung auf mobilen Geräten
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        
+        // Alle Layout-Writes zusammen ausführen
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+      });
+    };
+    
+    // Initiale Größe setzen
+    requestAnimationFrame(() => {
+      isMobile = window.innerWidth < 768;
+      const scale = isMobile ? 0.8 : 1;
       canvas.width = window.innerWidth * scale;
       canvas.height = window.innerHeight * scale;
       canvas.style.width = window.innerWidth + 'px';
       canvas.style.height = window.innerHeight + 'px';
-    };
+    });
     
-    resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     // BBQ-themed color palette - angepasst für Meat The Butcher
@@ -67,6 +85,7 @@ export default function FireAnimation() {
     // Initialize particles
     const createParticles = () => {
       // Performance-optimierte Partikelanzahl basierend auf Bildschirmgröße
+      // Verwende canvas.width/height statt window.innerWidth, um Forced Reflows zu vermeiden
       const particleCount = Math.min(
         Math.floor(canvas.width * canvas.height / 5000),
         100 // Maximale Partikel für Performance
