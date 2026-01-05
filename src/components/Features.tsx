@@ -75,7 +75,7 @@ const FeatureSection = memo(function FeatureSection({ title, description, imageP
             </div>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-butcher-black-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-butcher-black-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ left: 0, top: 0, right: 0, bottom: 0 }}></div>
       </div>
       
       <div className="flex-1 space-y-6">
