@@ -24,10 +24,20 @@ export async function getAvailablePhotos(): Promise<Photo[]> {
         // Überprüfen, ob das Bild existiert
         const response = await fetch(imagePath, { method: 'HEAD' });
         if (response.ok) {
+          // Variiere Alt-Texte für bessere SEO mit lokalen Keywords
+          const altTexts = [
+            `Catering Euskirchen - BBQ Event ${id} - Meat The Butcher`,
+            `BBQ Catering in Euskirchen - Event ${id} - Meat The Butcher`,
+            `Grill Catering Euskirchen - BBQ Event ${id} - Meat The Butcher`,
+            `Event Catering Euskirchen - BBQ ${id} - Meat The Butcher`,
+            `Catering Service Euskirchen - BBQ Event ${id} - Meat The Butcher`,
+          ];
+          const altText = altTexts[id % altTexts.length];
+          
           photos.push({
             id,
             src: imagePath,
-            alt: `Meat the Butcher Gallery Bild ${id}`,
+            alt: altText,
             thumbnail: thumbnailPath
           });
         }
@@ -48,10 +58,19 @@ export async function getAvailablePhotos(): Promise<Photo[]> {
 // Methode: Import der Bild-Manifeste zur Build-Zeit
 // Dies ist performanter als die Runtime-Überprüfung
 export function getStaticPhotoList(): Photo[] {
-  return imageIds.map(id => ({
+  // Variiere Alt-Texte für bessere SEO mit lokalen Keywords
+  const altTexts = [
+    `Catering Euskirchen - BBQ Event - Meat The Butcher`,
+    `BBQ Catering in Euskirchen - Event - Meat The Butcher`,
+    `Grill Catering Euskirchen - BBQ Event - Meat The Butcher`,
+    `Event Catering Euskirchen - BBQ - Meat The Butcher`,
+    `Catering Service Euskirchen - BBQ Event - Meat The Butcher`,
+  ];
+  
+  return imageIds.map((id, index) => ({
     id,
     src: `/gallery/image-${id}.webp`,
-    alt: `Meat the Butcher Gallery Bild ${id}`,
+    alt: `${altTexts[index % altTexts.length]} ${id}`,
     thumbnail: `/gallery/thumbnails/image-${id}.webp`
   }));
 }

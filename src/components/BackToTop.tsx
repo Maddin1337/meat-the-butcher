@@ -29,8 +29,8 @@ const BackToTop = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="bg-red-600 hover:bg-red-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-          aria-label="Zurück nach oben"
+          className="bg-butcher-red hover:bg-butcher-red-light text-white p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-butcher-black"
+          aria-label="Zurück nach oben scrollen"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,6 +38,7 @@ const BackToTop = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"

@@ -55,6 +55,7 @@ const Typewriter = ({
     let timeout: NodeJS.Timeout
 
     const currentText = texts[currentTextIndex]
+    if (!currentText) return
 
     const startTyping = () => {
       if (isDeleting) {
@@ -74,7 +75,7 @@ const Typewriter = ({
       } else {
         if (currentIndex < currentText.length) {
           timeout = setTimeout(() => {
-            setDisplayText((prev) => prev + currentText[currentIndex])
+            setDisplayText((prev) => prev + currentText[currentIndex]!)
             setCurrentIndex((prev) => prev + 1)
           }, speed)
         } else if (texts.length > 1) {
@@ -114,7 +115,7 @@ const Typewriter = ({
           className={
             cursorClassName +
             (hideCursorOnType &&
-              (currentIndex < texts[currentTextIndex].length || isDeleting)
+              (currentIndex < (texts[currentTextIndex]?.length ?? 0) || isDeleting)
               ? " hidden"
               : "")
           }

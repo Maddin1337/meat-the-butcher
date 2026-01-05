@@ -25,7 +25,8 @@ export default function LazyImage({
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
           setIsInView(true);
           observer.disconnect();
         }
@@ -95,6 +96,7 @@ export default function LazyImage({
         <img
           src={src}
           alt={alt}
+          loading="lazy"
           className={`w-full h-full object-cover transition-all duration-500 ${
             isLoaded
               ? 'opacity-100 scale-100'

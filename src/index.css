@@ -43,6 +43,37 @@
   body {
     @apply font-roboto-slab bg-butcher-black text-white;
   }
+
+  /* Accessibility: Verbesserte Focus States */
+  *:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Skip to content Link - Screen Reader Only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
 }
 
 @layer utilities {
@@ -477,6 +508,37 @@
   .hero-button-mobile {
     font-size: 1.25rem !important;
     padding: 0.75rem 1.5rem !important;
+  }
+}
+
+/* Accessibility: Verbesserte Focus States für interaktive Elemente */
+@layer utilities {
+  /* Focus States für Buttons */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Focus States für Form-Elemente */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #C41E3A;
+    outline-offset: 2px;
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 

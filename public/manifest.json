@@ -1,0 +1,38 @@
+{
+  "name": "Meat The Butcher - Catering Euskirchen",
+  "short_name": "Meat The Butcher",
+  "description": "Ihr Catering Service in Euskirchen. Exklusive BBQ-Events mit Feuer, Geschmack & Emotion.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#C41E3A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo-meatthebutcher.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-meatthebutcher.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "business", "lifestyle"],
+  "lang": "de",
+  "dir": "ltr",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Kontakt",
+      "short_name": "Kontakt",
+      "description": "Kontaktformular öffnen",
+      "url": "/#contact",
+      "icons": [{ "src": "/logo-meatthebutcher.png", "sizes": "96x96" }]
+    }
+  ]
+}
+

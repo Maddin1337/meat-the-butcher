@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { INTERSECTION_OBSERVER_CONFIG, ANIMATION_DELAYS } from '../constants';
 
 interface FeatureSectionProps {
   title: string;
@@ -8,18 +9,19 @@ interface FeatureSectionProps {
   image?: string;
 }
 
-function FeatureSection({ title, description, imagePosition, delay = 0, image }: FeatureSectionProps) {
+const FeatureSection = memo(function FeatureSection({ title, description, imagePosition, delay = 0, image }: FeatureSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
           setTimeout(() => setIsVisible(true), delay);
         }
       },
-      { threshold: 0.1 }
+      { threshold: INTERSECTION_OBSERVER_CONFIG.THRESHOLD }
     );
 
     if (ref.current) {
@@ -40,8 +42,9 @@ function FeatureSection({ title, description, imagePosition, delay = 0, image }:
         {image ? (
           <img
             src={image}
-            alt={title}
+            alt={`${title} - BBQ Catering Euskirchen`}
             className="w-full h-96 object-cover"
+            loading="lazy"
           />
         ) : (
           <div className="aspect-w-16 aspect-h-9 bg-gradient-to-br from-butcher-red-dark to-butcher-red">
@@ -63,26 +66,30 @@ function FeatureSection({ title, description, imagePosition, delay = 0, image }:
       </div>
     </div>
   );
-}
+});
+
+FeatureSection.displayName = 'FeatureSection';
 
 export default function Features() {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   
-  const erlebnisText = "Meat the Butcher steht für authentische Grillkunst, Leidenschaft und kulinarische Perfektion. Wir bieten euch ultimative Grill- und BBQ-Erlebnisse im Open Kitchen Style, bei denen Genuss, Handwerk und Entertainment zu einem unvergesslichen Erlebnis verschmelzen. Direkt vor euren Augen grillen unsere Profis auf Feuerplatten, im Holzbackofen oder auf Kamado-Grills – die Hitze, der Duft und das Knistern der Flammen werden zum Teil des Events.";
+  // Memoize text content to prevent unnecessary re-renders
+  const erlebnisText = useMemo(() => "Meat the Butcher steht für authentische Grillkunst, Leidenschaft und kulinarische Perfektion. Als Ihr Catering Service in Euskirchen bieten wir euch ultimative Grill- und BBQ-Erlebnisse im Open Kitchen Style, bei denen Genuss, Handwerk und Entertainment zu einem unvergesslichen Erlebnis verschmelzen. Direkt vor euren Augen grillen unsere Profis auf Feuerplatten, im Holzbackofen oder auf Kamado-Grills – die Hitze, der Duft und das Knistern der Flammen werden zum Teil des Events. Unser BBQ Catering in Euskirchen und der Region Euskirchen steht für Premium-Qualität und unvergessliche Momente.", []);
   
-  const konzeptText = "Ganz gleich ob Fingerfood, exklusive Tapas, frisches Seafood, saftige Steaks oder aromatisches Grillgemüse – wir gestalten gemeinsam mit euch ein maßgeschneidertes BBQ-Event, das perfekt zu eurer Veranstaltung passt. Jedes Detail wird individuell geplant: von der Menüauswahl über kreative Showelemente bis hin zur Präsentation. Dabei stehen Qualität, Regionalität und das besondere Geschmackserlebnis immer im Mittelpunkt.";
+  const konzeptText = useMemo(() => "Ganz gleich ob Fingerfood, exklusive Tapas, frisches Seafood, saftige Steaks oder aromatisches Grillgemüse – wir gestalten gemeinsam mit euch ein maßgeschneidertes BBQ-Event, das perfekt zu eurer Veranstaltung passt. Unser Catering Service in Euskirchen plant jedes Detail individuell: von der Menüauswahl über kreative Showelemente bis hin zur Präsentation. Dabei stehen Qualität, Regionalität und das besondere Geschmackserlebnis immer im Mittelpunkt. Grill Catering Euskirchen – für Events in Euskirchen, Kreis Euskirchen und der gesamten Region.", []);
   
-  const genussText = "Unser Repertoire ist randvoll mit erstklassigen Fleischsorten, talentierten Grillmeistern und den neuesten Trends aus der BBQ-Welt. Doch wir können mehr als nur Fleisch: Auch vegetarische und vegane Grillkreationen gehören zu unserem kulinarischen Repertoire und begeistern mit Raffinesse und Geschmack. BBQ-Entertainment in kulinarischer Perfektion ist unsere Leidenschaft – vom zarten Steak bis zur perfekt gegrillten Aubergine. Wir bringen Feuer, Emotion und Geschmack auf den Punkt und verwandeln euer Event in ein BBQ-Erlebnis, das in Erinnerung bleibt.";
+  const genussText = useMemo(() => "Unser Repertoire ist randvoll mit erstklassigen Fleischsorten, talentierten Grillmeistern und den neuesten Trends aus der BBQ-Welt. Doch wir können mehr als nur Fleisch: Auch vegetarische und vegane Grillkreationen gehören zu unserem kulinarischen Repertoire und begeistern mit Raffinesse und Geschmack. Als führender BBQ Catering Service in Euskirchen bringen wir Feuer, Emotion und Geschmack auf den Punkt und verwandeln euer Event in ein BBQ-Erlebnis, das in Erinnerung bleibt. Event Catering Euskirchen – für unvergessliche Momente in Euskirchen und Umgebung.", []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: INTERSECTION_OBSERVER_CONFIG.THRESHOLD }
     );
 
     if (ref.current) {
@@ -107,7 +114,7 @@ export default function Features() {
             </h2>
             <div className="w-32 h-1 bg-butcher-red mx-auto mb-6"></div>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Entdeckt unsere BBQ-Welt: Erlebnis, Konzept und Genuss in perfekter Harmonie
+              Entdeckt unsere BBQ-Welt: Erlebnis, Konzept und Genuss in perfekter Harmonie - Ihr Catering Service in Euskirchen, Region Euskirchen und Umgebung
             </p>
           </div>
           
@@ -116,7 +123,7 @@ export default function Features() {
               title="Born to BBQ"
               description={erlebnisText}
               imagePosition="left"
-              delay={0}
+              delay={ANIMATION_DELAYS.FEATURE_SECTION_1}
               image="/lasse-mo.webp"
             />
 
@@ -124,7 +131,7 @@ export default function Features() {
               title="Taste the fire"
               description={konzeptText}
               imagePosition="right"
-              delay={200}
+              delay={ANIMATION_DELAYS.FEATURE_SECTION_2}
               image="/burger.webp"
             />
 
@@ -132,7 +139,7 @@ export default function Features() {
               title="BBQ Experience"
               description={genussText}
               imagePosition="left"
-              delay={400}
+              delay={ANIMATION_DELAYS.FEATURE_SECTION_3}
               image="/grill-beach.webp"
             />
           </div>

@@ -9,7 +9,7 @@ export default function Footer() {
             <div className="flex items-center justify-center md:justify-start space-x-2 mb-4">
               <img
                 src="/logo-meatthebutcher.png"
-                alt="Meat the Butcher Logo"
+                alt="Meat The Butcher Logo - BBQ Catering Euskirchen"
                 className="w-8 h-8"
               />
               <h3 className="font-bebas text-2xl text-white tracking-wider">
@@ -17,7 +17,7 @@ export default function Footer() {
               </h3>
             </div>
             <p className="text-gray-400 text-sm">
-              BBQ Catering vom Profi - Open Kitchen Style für unvergessliche Events
+              BBQ Catering vom Profi - Open Kitchen Style für unvergessliche Events in Euskirchen und Umgebung
             </p>
           </div>
 

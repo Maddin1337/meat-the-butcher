@@ -12,7 +12,8 @@ function SocialLink({ icon, name, href }: SocialLinkProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col items-center space-y-3 transition-transform duration-300 transform hover:scale-110"
+      className="group flex flex-col items-center space-y-3 transition-transform duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-butcher-black rounded-lg p-2"
+      aria-label={`${name} Profil von Meat The Butcher öffnen (öffnet in neuem Tab)`}
     >
       <div className="bg-butcher-black-light border-2 border-butcher-red p-6 rounded-full transition-all duration-300 group-hover:bg-butcher-red group-hover:border-butcher-red-light group-hover:shadow-xl group-hover:shadow-butcher-red/50">
         {icon}
@@ -34,7 +35,7 @@ export default function SocialMedia() {
           </h2>
           <div className="w-32 h-1 bg-butcher-red mx-auto mb-6"></div>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Bleib auf dem Laufenden über unsere neuesten Events.
+            Bleib auf dem Laufenden über unsere neuesten Events in Euskirchen und Umgebung.
           </p>
         </div>
 
